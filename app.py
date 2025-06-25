@@ -10,7 +10,19 @@ app.secret_key = 'your_secret_key'  # for flash messages
 
 # Google Sheets setup
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+import json
+import os
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Read credentials from environment variable
+google_creds = os.environ.get("GOOGLE_CREDENTIALS")
+if not google_creds:
+    raise Exception("GOOGLE_CREDENTIALS env variable not set")
+
+creds_dict = json.loads(google_creds)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+
+
 client = gspread.authorize(creds)
 sheet = client.open("Storage Tracker").sheet1
 
