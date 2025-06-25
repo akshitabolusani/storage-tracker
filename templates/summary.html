@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storage Summary</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f7f7f7; }
+        h2 { text-align: center; }
+        .summary-box { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .summary-box div { font-size: 18px; padding: 8px 0; border-bottom: 1px solid #ddd; }
+        a { display: block; text-align: center; margin-top: 20px; color: #333; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h2>📦 Storage Summary</h2>
+    <div class="summary-box">
+        {% for key, value in totals.items() %}
+            <div><strong>{{ key }}:</strong> {{ '%.2f'|format(value) }}</div>
+        {% endfor %}
+    </div>
+
+    <a href="/">⬅️ Back to Form</a>
+</body>
+</html>
